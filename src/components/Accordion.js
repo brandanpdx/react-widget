@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 
 const Accordion = ({ items }) => {
-
   const [activeIndex, setActiveIndex] = useState(null);
 
-  //Helper Method 
+  //Helper Method
   const onTitleClick = (index) => {
     setActiveIndex(index);
   };
 
   const renderedItems = items.map((item, index) => {
-    const active = index === activeIndex? 'active' : '';
+    const active = index === activeIndex ? "active" : "";
 
     return (
       <React.Fragment key={item.title}>
@@ -24,10 +23,12 @@ const Accordion = ({ items }) => {
       </React.Fragment>
     );
   });
-  return <div className="ui styled accordion">
-    {renderedItems}
-    <h1>{activeIndex}</h1>
-    </div>;
+  return (
+    <div className="ui styled accordion">
+      {renderedItems}
+      <h1>{activeIndex}</h1>
+    </div>
+  );
 };
 
 export default Accordion;
