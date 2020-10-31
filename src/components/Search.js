@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Search = () => {
+  // Initialize pieces of state 
   const [term, setTerm] = useState("aviation");
   const [results, setResults] = useState([]);
-
-  console.log(results);
-
-  console.log("I run with every render and at initial render!");
 
   useEffect(() => {
     const search = async () => {
@@ -22,8 +19,15 @@ const Search = () => {
       });
       setResults(data.query.search);
     };
-    if (term) {
-      search();
+    // Throttling API Requests
+    const timeoutId = setTimeout(() => {
+      if (term) {
+        search();
+      }
+    }, 500);
+    // Cleaning up/resetting timer when user types
+    return () => {
+      clearTimeout(timeoutId);
     }
   }, [term]);
 
