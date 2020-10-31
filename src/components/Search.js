@@ -27,7 +27,7 @@ const Search = () => {
 
   const renderedResults = results.map((result) => {
     return (
-      <div className="item">
+      <div key={result.pageid} className="item">
         <div className="content">
           <div className="header">{result.title}</div>
           {result.snippet}
@@ -38,7 +38,7 @@ const Search = () => {
 
   return (
     <div>
-      <div className="ui form">
+      <div  className="ui form">
         <div className="field">
           <label>Enter Search Term:</label>
           <input
