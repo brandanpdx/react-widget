@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Search = () => {
-  // Initialize pieces of state 
+  // Initialize pieces of state
   const [term, setTerm] = useState("aviation");
   const [results, setResults] = useState([]);
 
@@ -19,15 +19,20 @@ const Search = () => {
       });
       setResults(data.query.search);
     };
-    // Throttling API Requests
-    const timeoutId = setTimeout(() => {
-      if (term) {
-        search();
-      }
-    }, 500);
-    // Cleaning up/resetting timer when user types
-    return () => {
-      clearTimeout(timeoutId);
+
+    if (term && !results) {
+      search();
+    } else {
+      // Throttling API Requests
+      const timeoutId = setTimeout(() => {
+        if (term) {
+          search();
+        }
+      }, 500);
+      // Cleaning up/resetting timer when user types
+      return () => {
+        clearTimeout(timeoutId);
+      };
     }
   }, [term]);
 
